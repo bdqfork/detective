@@ -128,3 +128,4 @@ data/core_3000
 data/coreless_3000
 weights*.zip
 weights/vgg16_reducedfc.pth
+data/test

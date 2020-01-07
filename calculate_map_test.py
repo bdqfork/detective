@@ -14,17 +14,21 @@ labelmap = (
     '带电芯充电宝',
     '不带电芯充电宝',
 )
-parser = argparse.ArgumentParser(description='Single Shot MultiBox Detector Training With Pytorch')
+parser = argparse.ArgumentParser(
+    description='Single Shot MultiBox Detector Training With Pytorch')
 
-parser.add_argument('--predicted_file', default='', type=str, help='Checkpoint state_dict file for transfer learning')
-parser.add_argument('--annopath', default='./Anno_test', type=str, help='annotations file path')
-parser.add_argument('--test_image_file', default='./core_coreless_test.txt', type=str, help='a text file with test set image names')
+parser.add_argument('--result_folder', default='', type=str,
+                    help='Checkpoint state_dict file for transfer learning')
+parser.add_argument('--anno_path', default='./Anno_test',
+                    type=str, help='annotations file path')
+parser.add_argument('--test_image_file', default='./core_coreless_test.txt',
+                    type=str, help='a text file with test set image names')
 args = parser.parse_args()
 
 # annopath = os.path.join('/home/rustin/weiyanlu/Anno_test', '%s.xml')#测试集标注文件路径
 # test_imagesetfile = '/home/rustin/weiyanlu/core_coreless_test.txt'#测试集里面的图片名
-annopath = os.path.join('./{}'.format(args.annopath), '%s.xml') #测试集标注文件路径
-test_imagesetfile = args.test_image_file #测试集里面的图片名
+annopath = os.path.join('./{}'.format(args.anno_path), '%s.xml')  # 测试集标注文件路径
+test_imagesetfile = args.test_image_file  # 测试集里面的图片名
 '''
 def get_voc_results_file_template(image_set, cls):
     # VOCdevkit/VOC2007/results/det_test_aeroplane.txt
@@ -48,7 +52,8 @@ def do_python_eval(output_dir='output', use_07=False):
     for i, cls in enumerate(labelmap):
         # filename = get_voc_results_file_template('test', cls)
         # filename = 'det_test_橙色液体.txt'
-        filename = os.path.join(args.predicted_file, 'det_' + 'test' + '_%s.txt' % cls)
+        filename = os.path.join(
+            args.result_folder, 'det_' + 'test' + '_%s.txt' % cls)
         rec, prec, ap = voc_eval(
             filename, annopath, test_imagesetfile, cls, cachedir,
             ovthresh=0.5, use_07_metric=use_07_metric)
@@ -308,7 +313,7 @@ def parse_rec(filename):
             ymax = int(temp[5])
             if ymax > height:
                 ymax = height - 1
-            ##name
+            # name
 
             obj_struct['name'] = name
             obj_struct['pose'] = 'Unspecified'
@@ -339,9 +344,3 @@ def parse_rec(filename):
 
 
 do_python_eval()
-
-
-
-
-
-

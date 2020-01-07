@@ -17,11 +17,14 @@ set_type = 'test'
 def str2bool(v):
     return v.lower() in ("yes", "true", "t", "1")
 
-parser = argparse.ArgumentParser(description='Single Shot MultiBox Detector Evaluation')
 
-parser.add_argument('image_path', type=str, help='Test file')
-parser.add_argument('anno_path', type=str, help='Test file')
-parser.add_argument('result_folder', type=str, help='File path to save results')
+parser = argparse.ArgumentParser(
+    description='Single Shot MultiBox Detector Evaluation')
+
+parser.add_argument('--image_path', type=str, help='Test file')
+parser.add_argument('--anno_path', type=str, help='Test file')
+parser.add_argument('--result_folder', type=str,
+                    help='File path to save results')
 
 parser.add_argument('--trained_model',
                     default='weights/SIXray.pth', type=str,
